@@ -68,7 +68,7 @@ df_credit = pd.read_sql("""
     JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
     GROUP BY e.employeeNumber
     HAVING AVG(c.creditLimit) > 90000
-    ORDER BY AVG(c.creditLimit) DESC
+    ORDER BY num_customers DESC, e.lastName
 """, conn)
 
 # CodeGrade step7
@@ -122,8 +122,8 @@ df_under_20 = pd.read_sql("""
         GROUP BY p.productCode
         HAVING COUNT(DISTINCT o2.customerNumber) < 20
     )
+    ORDER BY e.firstName
 """, conn)
-df_under_20
 
 # Run this cell without changes
 
